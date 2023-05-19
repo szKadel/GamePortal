@@ -17,16 +17,19 @@ class GamesSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for($i = 0; $i <100; $i++)
-        {
-            DB::table('games')->insert([
-                'title' => $faker->words($faker->numberBetween(1,3),true),
-                'description' => $faker->sentence,
-                'publisher'=> $faker->randomElement(['Ateri','Blizard','Ubisoft','EA Games']),
-                'genre_id'=> $faker->numberBetween(1, 5),
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now(),
-            ]);
+        for($j = 0; $j<10; $j++) {
+            $games = [];
+            for ($i = 0; $i < 100; $i++) {
+                $games[] = [
+                    'title' => $faker->words($faker->numberBetween(1, 3), true),
+                    'description' => $faker->sentence,
+                    'publisher' => $faker->randomElement(['Ateri', 'Blizard', 'Ubisoft', 'EA Games']),
+                    'genre_id' => $faker->numberBetween(1, 5),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ];
+            }
+            DB::table('games')->insert($games);
         }
     }
 }
