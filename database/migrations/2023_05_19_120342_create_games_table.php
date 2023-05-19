@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title',100);
             $table->text('description') -> nullable();
+            $table->integer('genre_id') -> nullable();
             $table->string('publisher',100)->comment('game publisher');
             $table->float('score') -> nullable();
-            $table->timestamps();
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 
