@@ -7,6 +7,12 @@
     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
     Użytkownicy
 </a>
+
+<a class="nav-link" href="{{ route('get.game.list') }}">
+    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+    Lita Gier
+</a>
+
 <a class="nav-link" href="#">
     <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
     Dodaj
