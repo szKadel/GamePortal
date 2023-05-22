@@ -6,13 +6,14 @@ use App\Models\Game;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index():View
     {
        // $result = DB::table('games')->limit(100);
         $result = Game::all();
@@ -38,9 +39,11 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Game $game)
+    public function show(Game $game, $id):View
     {
-        //
+        $movie = DB::table('games')->find($id);
+
+        return view('games.get',['movies'=>$movie]);
     }
 
     /**

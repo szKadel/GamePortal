@@ -12,20 +12,18 @@
                         <table class="table table-bordered" id="dataTable">
                             <thead>
                                 <th>Lp</th>
-                                <th>Tytuł</th>
-                                <th>Ocena</th>
-                                <th>Kategoria</th>
-                                <th>Opcje</th>
+                                <th>Title</th>
+                                <th>Score</th>
+                                <th>Category</th>
+                                <th>Options</th>
                             </thead>
     @foreach ($movies as $user)
 
             <tr>
                 <td>{{ $user->id }}</td> <td>{{ $user->title }}</td>
-                <td>{{ $user->scre??0 }}/10</td> <td>{{ $user->genre_id }}</td>
+                <td>{{ $user->score??'?' }}/10</td> <td>{{ $user->genre_id }}</td>
                 <td>
-                    <a href="">Zobacz</a>
-                    <a href="">Modyfikuj</a>
-                    <a href="">Usuń</a>
+                    <a href="{{route('get.game',['id'=>$user->id])}}">Show</a>
                 </td>
             </tr>
     @endforeach

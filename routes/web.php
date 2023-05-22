@@ -25,7 +25,10 @@ Route::get('users/{userId}', [UserController::class, 'show'])
     ->name('get.user.show');
 
 Route::get('games', [\App\Http\Controllers\GameController::class, 'index'])
-    ->name('get.game.list');
+    ->name('game.index');
+
+Route::get('games/{id}', [\App\Http\Controllers\GameController::class, 'show'])
+    ->name('get.game');
 
 //Route::get('users/{id}/profile', 'User\ProfilController@show')
 //    ->name('get.user.profile');
