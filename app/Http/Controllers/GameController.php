@@ -7,6 +7,7 @@ use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use mysql_xdevapi\Table;
 
 class GameController extends Controller
 {
@@ -17,7 +18,16 @@ class GameController extends Controller
     {
        // $result = DB::table('games')->limit(100);
         $result = Game::all();
-        return view('games.list',['movies'=>$result]);
+
+        $stats = [
+            'count' => DB::table('games')->count(),
+            'countScoreGtFive' => DB::table('games')->where('score','>',5)->count(),
+            'max' => DB::table('games')->max('score')??0,
+            'min' => DB::table('games')->min('score')??0,
+            'avg' => DB::table('games')->avg('score')??0,
+        ];
+
+        return view('games.list',['movies'=>$result, 'stats'=>$stats]);
     }
 
     /**
