@@ -17,7 +17,16 @@ class GameController extends Controller
     public function index():View
     {
        // $result = DB::table('games')->limit(100);
-        $result = Game::all();
+        $result = DB::table('games')
+            ->join('genres','games.genre_id','=','genres.id')
+            ->select('games.id','title','score','name')
+            ->get();
+
+        $scoreCount = DB::table('games')
+            ->select(DB::raw('count(*) as count'), 'score')
+
+            ->groupBy('score')
+            ->get();
 
         $stats = [
             'count' => DB::table('games')->count(),
@@ -27,7 +36,13 @@ class GameController extends Controller
             'avg' => DB::table('games')->avg('score')??0,
         ];
 
-        return view('games.list',['movies'=>$result, 'stats'=>$stats]);
+        $scoreStats  = DB::table('games')
+            ->select('score')
+            ->groupBy('score');
+
+
+
+        return view('games.list',['movies'=>$result, 'stats'=>$stats, 'scoreCount'=>$scoreCount]);
     }
 
     /**
@@ -35,7 +50,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

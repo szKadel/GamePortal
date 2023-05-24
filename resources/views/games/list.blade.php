@@ -74,6 +74,28 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable">
                             <thead>
+                            <th>Score</th>
+                            <th>Count</th>
+                            </thead>
+                            @foreach ($scoreCount as $scoreCount)
+
+                                <tr>
+                                    <td>{{ $scoreCount->score??"With out Score" }}</td> <td>{{$scoreCount->count}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i> Gry
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable">
+                            <thead>
                                 <th>Lp</th>
                                 <th>Title</th>
                                 <th>Score</th>
@@ -84,7 +106,7 @@
 
             <tr>
                 <td>{{ $user->id }}</td> <td>{{ $user->title }}</td>
-                <td>{{ $user->score??'?' }}/10</td> <td>{{ $user->genre_id }}</td>
+                <td>{{ $user->score??'?' }}/10</td> <td>{{ $user->name }}</td>
                 <td>
                     <a href="{{route('get.game',['id'=>$user->id])}}">Show</a>
                 </td>
