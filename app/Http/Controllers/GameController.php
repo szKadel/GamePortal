@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use mysql_xdevapi\Table;
@@ -24,9 +25,13 @@ class GameController extends Controller
 
         $scoreCount = DB::table('games')
             ->select(DB::raw('count(*) as count'), 'score')
-
             ->groupBy('score')
             ->get();
+
+        $bestOfFive = DB::table('games')
+            ->orderBy('score','desc')
+            ->select('title','score')
+            ->take(5)->get();
 
         $stats = [
             'count' => DB::table('games')->count(),
@@ -36,13 +41,9 @@ class GameController extends Controller
             'avg' => DB::table('games')->avg('score')??0,
         ];
 
-        $scoreStats  = DB::table('games')
-            ->select('score')
-            ->groupBy('score');
 
 
-
-        return view('games.list',['movies'=>$result, 'stats'=>$stats, 'scoreCount'=>$scoreCount]);
+        return view('games.list',['movies'=>$result, 'stats'=>$stats, 'scoreCount'=>$scoreCount,'bestOfFive'=>$bestOfFive]);
     }
 
     /**

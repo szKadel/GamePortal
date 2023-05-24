@@ -64,8 +64,26 @@
             </div>
         </div>
     </div>
-
-        <div class="row mt-3">
+    <div class="row mt-3">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i> Gry
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                        <th>Title</th>
+                        <th>Score</th>
+                        </thead>
+                        @foreach ($bestOfFive as $best)
+                            <tr>
+                                <td>{{$best->title}}</td> <td>{{$best->score}}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i> Gry
