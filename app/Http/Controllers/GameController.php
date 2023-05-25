@@ -18,20 +18,6 @@ class GameController extends Controller
     public function index():View
     {
        // $result = DB::table('games')->limit(100);
-        $result = DB::table('games')
-            ->join('genres','games.genre_id','=','genres.id')
-            ->select('games.id','title','score','name')
-            ->get();
-
-        $scoreCount = DB::table('games')
-            ->select(DB::raw('count(*) as count'), 'score')
-            ->groupBy('score')
-            ->get();
-
-        $bestOfFive = DB::table('games')
-            ->orderBy('score','desc')
-            ->select('title','score')
-            ->take(5)->get();
 
         $stats = [
             'count' => DB::table('games')->count(),

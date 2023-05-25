@@ -15,6 +15,7 @@ class UserController extends Controller
 
         $faker = Factory::create();
         $count = $faker->numberBetween(3, 15);
+
         for ($i = 0; $i < $count; $i++) {
             $users[] = [
                 'id' => $faker->numberBetween(1, 1000),
