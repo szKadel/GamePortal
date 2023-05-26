@@ -17,7 +17,10 @@ class GameController extends Controller
      */
     public function index():View
     {
-       // $result = DB::table('games')->limit(100);
+       $result = DB::table('games')
+           ->select('game_id','title','name','score','publisher')
+           ->join('genres','genre_id','=','id')
+            ->simplepaginate(100);
 
         $stats = [
             'count' => DB::table('games')->count(),
@@ -27,9 +30,7 @@ class GameController extends Controller
             'avg' => DB::table('games')->avg('score')??0,
         ];
 
-
-
-        return view('games.list',['movies'=>$result, 'stats'=>$stats, 'scoreCount'=>$scoreCount,'bestOfFive'=>$bestOfFive]);
+        return view('games.list',['movies'=>$result, 'stats'=>$stats]);
     }
 
     /**
@@ -53,9 +54,9 @@ class GameController extends Controller
      */
     public function show(Game $game, $id):View
     {
-        $movie = DB::table('games')->find($id);
+        $movie = DB::table('games')->where('game_id','=',$id)->get();
 
-        return view('games.get',['movies'=>$movie]);
+        return view('games.get',['movies'=>$movie[0]??[]]);
     }
 
     /**

@@ -82,19 +82,23 @@
                                 <th>Category</th>
                                 <th>Options</th>
                             </thead>
-    @foreach ($movies as $user)
+    @foreach ($movies as $movie)
 
             <tr>
-                <td>{{ $user->id }}</td> <td>{{ $user->title }}</td>
-                <td>{{ $user->score??'?' }}/10</td> <td>{{ $user->name }}</td>
+                <td>{{ $movie->game_id }}</td> <td>{{ $movie->title }}</td>
+                <td>{{ $movie->score??'?' }}/10</td> <td>{{ $movie->name }}</td>
                 <td>
-                    <a href="{{route('get.game',['id'=>$user->id])}}">Show</a>
+                    <a href="{{route('get.game',['id'=>$movie->game_id])}}">Show</a>
                 </td>
             </tr>
     @endforeach
                         </table>
+
                     </div>
+                    {{$movies->links()}}
                 </div>
+
             </div>
+    </div>
 
 @endsection

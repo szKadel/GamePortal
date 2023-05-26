@@ -9,11 +9,12 @@
 
 @section('content')
     @if(!empty($movies))
+
     <div class="card">
-        <h5 class="card-header">{{ $movies->title }}</h5>
+        <h5 class="card-header">{{ $movies->title}}</h5>
         <div class="card-body">
             <ul>
-                <li>Id: {{ $movies->id  }}</li>
+                <li>Id: {{ $movies->game_id  }}</li>
                 <li>Title: {{ $movies->title  }}</li>
                 <li>Score: {{ $movies->score ?? 0  }}</li>
                 <li>Gender: {{ $movies->genre_id  }}</li>
