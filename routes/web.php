@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Game\BuilderController;
+use App\Http\Controllers\Game\EloquentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,16 +26,45 @@ Route::get('users', [\App\Http\Controllers\UserController::class, 'list'])
 Route::get('users/{userId}', [UserController::class, 'show'])
     ->name('get.user.show');
 
-Route::get('games', [\App\Http\Controllers\GameController::class, 'index'])
-    ->name('game.index');
-
-Route::get('games/{id}', [\App\Http\Controllers\GameController::class, 'show'])
-    ->name('get.game');
-
-//Route::get('users/{id}/profile', 'User\ProfilController@show')
-//    ->name('get.user.profile');
-
 Route::get('users/{id}/address', [\App\Http\Controllers\User\ShowAddress::class])
     ->where(['id' => '[0-9]+'])
     ->name('get.users.address');
+
+//GAMES
+
+Route::group([
+    'prefix'=>'b/games',
+    'namespace'=>'',
+        'as'=>'game.b.'
+    ]
+    ,function(){
+    Route::get('dashboard', [BuilderController::class, 'dashboard'])
+        ->name('dashboard');
+
+    Route::get('', [BuilderController::class, 'index'])
+        ->name('list');
+
+    Route::get('{id}', [BuilderController::class, 'show'])
+        ->name('get');
+});
+
+
+
+Route::group([
+        'prefix'=>'e/games',
+        'namespace'=>'',
+        'as'=>'game.e.'
+    ]
+    ,function(){
+        Route::get('dashboard', [EloquentController::class, 'dashboard'])
+            ->name('dashboard');
+
+        Route::get('', [EloquentController::class, 'index'])
+            ->name('list');
+
+        Route::get('{id}', [EloquentController::class, 'show'])
+            ->name('get');
+    });
+
+
 

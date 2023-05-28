@@ -8,13 +8,25 @@
     Users List
 </a>
 
-<div class="sb-sidenav-menu-heading">Games</div>
-<a class="nav-link" href="{{ route('game.index') }}">
+<div class="sb-sidenav-menu-heading">Games Bulider</div>
+
+<a class="nav-link" href="{{ route('game.b.dashboard') }}">
+    <div class="sb-nav-link-icon"><i class="fas fa-gamepad"></i></div>
+    Dashboard
+</a>
+
+<a class="nav-link" href="{{ route('game.b.list') }}">
     <div class="sb-nav-link-icon"><i class="fas fa-gamepad"></i></div>
     Games
 </a>
 
-<a class="nav-link" href="#">
-    <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
-    Add
+<div class="sb-sidenav-menu-heading">Games Eloquent</div>
+<a class="nav-link" href="{{ route('game.e.dashboard') }}">
+    <div class="sb-nav-link-icon"><i class="fas fa-gamepad"></i></div>
+    Dashboard
+</a>
+
+<a class="nav-link" href="{{ route('game.e.list') }}">
+    <div class="sb-nav-link-icon"><i class="fas fa-gamepad"></i></div>
+    Games
 </a>

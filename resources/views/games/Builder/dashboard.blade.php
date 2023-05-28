@@ -64,41 +64,28 @@
             </div>
         </div>
     </div>
+
     <div class="row mt-3">
-
-
-
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i> Gry
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable">
-                            <thead>
-                                <th>Lp</th>
-                                <th>Title</th>
-                                <th>Score</th>
-                                <th>Category</th>
-                                <th>Options</th>
-                            </thead>
-    @foreach ($movies as $movie)
-
-            <tr>
-                <td>{{ $movie->game_id }}</td> <td>{{ $movie->title }}</td>
-                <td>{{ $movie->score??'?' }}/10</td> <td>{{ $movie->name }}</td>
-                <td>
-                    <a href="{{route('get.game',['id'=>$movie->game_id])}}">Show</a>
-                </td>
-            </tr>
-    @endforeach
-                        </table>
-
-                    </div>
-                    {{$movies->links()}}
-                </div>
-
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i> Gry
             </div>
-    </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                        <th>Score</th>
+                        <th>Count</th>
+                        </thead>
+                        @foreach ($scoreCount as $scoreCount)
+
+                            <tr>
+                                <td>{{ $scoreCount->score??"With out Score" }}</td> <td>{{$scoreCount->count}}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
 
 @endsection

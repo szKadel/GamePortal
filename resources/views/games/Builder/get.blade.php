@@ -4,7 +4,7 @@
 
 @section('sidebar')
     @parent
-    <div>Games List: <a href="{{ route('game.index') }}">Link</a></div>
+    <div>Games List: <a href="{{ route('game.b.list') }}">Link</a></div>
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
                 <li>Gender: {{ $movies->genre_id  }}</li>
             </ul>
 
-            <a href="{{ route('game.index') }}" class="btn btn-light">Games List</a>
+            <a href="{{ route('game.b.list') }}" class="btn btn-light">Games List</a>
         </div>
     </div>
     @else
