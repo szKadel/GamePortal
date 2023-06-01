@@ -9,5 +9,9 @@ class Game extends Model
 {
     use HasFactory;
 
-    public $table = 'games';
+    protected $table = 'games';
+    protected $primaryKey = 'game_id';
+    protected $fillable =[
+        'title'
+    ];
 }

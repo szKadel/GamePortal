@@ -65,7 +65,32 @@
         </div>
     </div>
 
-    <div class="row mt-3">
+    <div class="row-cols-2 mt-3">
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i> Best Games
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                        <th>Position</th>
+                        <th>Title</th>
+                        <th>Score</th>
+                        </thead>
+                        <?php
+                        $i = 1;
+                        ?>
+                        @foreach ($bestGames as $besgame)
+                            <tr>
+                                <td>{{$i++}}</td><td>{{ $besgame->title }}</td> <td>{{$besgame->score}}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i> Gry
@@ -78,7 +103,6 @@
                         <th>Count</th>
                         </thead>
                         @foreach ($scoreCount as $scoreCount)
-
                             <tr>
                                 <td>{{ $scoreCount->score??"With out Score" }}</td> <td>{{$scoreCount->count}}</td>
                             </tr>

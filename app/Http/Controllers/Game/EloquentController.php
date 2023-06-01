@@ -16,10 +16,8 @@ class EloquentController extends Controller
      */
     public function index():View
     {
-        $result = DB::table('games')
-            ->select('game_id','title','name','score','publisher')
-            ->join('genres','genre_id','=','id')
-            ->simplepaginate(100);
+
+        $result = Game::simplePaginate(10);
 
         $stats = [
             'count' => DB::table('games')->count(),
@@ -42,10 +40,10 @@ class EloquentController extends Controller
 
     public function dashboard()
     {
+        $bestGames = Game::where('score','>',90)->orderBy('score','desc')->limit(10)->get();
 
         $scoreCount = DB::table('games')
             ->select(DB::raw('count(*) as count'), 'score')
-
             ->groupBy('score')
             ->get();
 
@@ -57,7 +55,7 @@ class EloquentController extends Controller
             'avg' => DB::table('games')->avg('score')??0,
         ];
 
-        return view('games.Eloquent.dashboard',['stats'=>$stats,'scoreCount'=>$scoreCount]);
+        return view('games.Eloquent.dashboard',['stats'=>$stats,'scoreCount'=>$scoreCount,'bestGames'=>$bestGames]);
     }
 
     /**
@@ -73,11 +71,9 @@ class EloquentController extends Controller
      */
     public function show(Game $game, $id):View
     {
-        $movie = DB::table('games')->where('game_id','=',$id)->get();
+        $movie = Game::findOrFail($id);
 
-
-
-        return view('games.Eloquent.get',['movies'=>$movie[0]??[]]);
+        return view('games.Eloquent.get',['movies'=>$movie]);
     }
 
     /**
